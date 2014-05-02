@@ -1,9 +1,8 @@
-let growTree (input:string) =
-    let args = input.Split([|'\n'|]) |> Array.map (fun c -> int c)
-    let testcases = args |> Seq.head
-        
-    for i = 1 to testcases do
-        let cycle = args.[i]
+let growTree (input:int[]) =
+    let numTestcases = input.[0]
+       
+    for i = 1 to numTestcases do
+        let cycle = input.[i]
         let mutable treeSize = 1
         for c = 1 to cycle do
             if (c % 2 = 0) then
@@ -20,16 +19,13 @@ growTree("2\n3\n4") *)
 (* Boiler plate stuff for HackerRank *)
 [<EntryPoint>]
 let main argv = 
-    let mutable input = []
-    
-    let mutable loop = true
-    while loop do
-        let line = System.Console.ReadLine()
-        if System.String.IsNullOrEmpty(line) then
-            loop <- false
 
-        Array.append
-    printfn "%s" input
-    growTree input
+    let readInputsAsInts = 
+      Seq.initInfinite (fun _ -> System.Console.ReadLine())
+      |> Seq.takeWhile (fun s -> s <> null)
+      |> Seq.map(fun c -> int c)
+      |> Seq.toArray
+
+    growTree readInputsAsInts
     0
      
